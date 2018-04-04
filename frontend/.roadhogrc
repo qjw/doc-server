@@ -1,0 +1,35 @@
+{
+  "entry": "src/index.js",
+  "proxy": {
+     "/api/v1": {
+       "target": "http://127.0.0.1:8888",
+       "changeOrigin": true,
+       "pathRewrite": { "^/api/v1" : "/api/v1" }
+     },
+     "/gateway": {
+       "target": "http://127.0.0.1:8888",
+       "changeOrigin": true,
+       "pathRewrite": { "^/gateway" : "/gateway" }
+     },
+     "/swagger": {
+       "target": "http://127.0.0.1:8888",
+       "changeOrigin": true,
+       "pathRewrite": { "^/swagger" : "/swagger" }
+     }
+  },
+  "env": {
+    "development": {
+      "extraBabelPlugins": [
+		  "dva-hmr",
+	  "transform-runtime",
+		["import", { "libraryName": "antd", "libraryDirectory": "es", "style": "css" }]
+      ]
+    },
+    "production": {
+      "extraBabelPlugins": [
+		  "transform-runtime",
+	  ["import", { "libraryName": "antd", "libraryDirectory": "es", "style": "css" }]
+      ]
+    }
+  }
+}
