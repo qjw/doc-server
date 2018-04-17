@@ -1,16 +1,13 @@
 package router
 
 const (
-	GIT_ROOT   = "/tmp/aa"
+	LOCAL_DIR  = "/tmp/data"
 	GIT_ORIGIN = "https://github.com/qjw/test.git"
 	SWAGGER_UI = "/tmp/swagger_ui"
 	FRONTEND   = "/tmp/frontend"
 	PORT       = 8888
 
-	REDIS_HOST     = "localhost"
-	REDIS_PORT     = 6379
-	REDIS_DB       = 1
-	REDIS_PASSWORD = ""
+	REDIS_URL = "redis://localhost:6379/1"
 
 	CORP_ID           = ""
 	CORP_AGENT_SECRET = ""
@@ -29,10 +26,7 @@ type Config struct {
 	Port      int    `json:"port"`
 
 	// Redis
-	RedisHost     string `json:"redisHost""`
-	RedisPort     int    `json:"redisPort"`
-	RedisDb       int    `json:"redisDb"`
-	RedisPassword string `json:"redisPassword"`
+	RedisUrl string `json:"redisUrl""`
 
 	// ----------------------企业号
 	// 企业号corpid
@@ -49,17 +43,13 @@ type Config struct {
 
 func InitConfig() *Config {
 	return &Config{
-		LocalDir:  GetEnv("LOCAL_DIR", GIT_ROOT),
+		LocalDir:  GetEnv("LOCAL_DIR", LOCAL_DIR),
 		GitOrigin: GetEnv("GIT_ORIGIN", GIT_ORIGIN),
 		SwaggetUi: GetEnv("SWAGGER_UI", SWAGGER_UI),
 		Frontend:  GetEnv("FRONTEND", FRONTEND),
 
-		Port: GetEnvInt("PORT", PORT),
-
-		RedisHost:     GetEnv("REDIS_HOST", REDIS_HOST),
-		RedisPort:     GetEnvInt("REDIS_PORT", REDIS_PORT),
-		RedisDb:       GetEnvInt("REDIS_DB", REDIS_DB),
-		RedisPassword: GetEnv("REDIS_PASSWORD", REDIS_PASSWORD),
+		Port:     GetEnvInt("PORT", PORT),
+		RedisUrl: GetEnv("REDIS_URL", REDIS_URL),
 
 		CorpID:          GetEnv("CORP_ID", CORP_ID),
 		CorpAgentSecret: GetEnv("CORP_AGENT_SECRET", CORP_AGENT_SECRET),

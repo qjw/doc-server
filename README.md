@@ -120,10 +120,12 @@ make
 3. SWAGGER_UI : swagger ui前端的本地路径
 4. FRONTEND ： 前端资源的本地路径，参见`编译前端`
 5. PORT : 绑定的端口
-6. REDIS_HOST : redis主机地址（或者ip）默认"localhost"
-7. REDIS_PORT : redis端口，默认6379
-8. REDIS_DB : redis DB，默认1
-9. REDIS_PASSWORD : redis密码，默认空字符
+6. REDIS_URL : redis主机地址（或者ip）默认"redis://localhost:6379/1"，若指定密码，使用格式`redis://:password@localhost:6379/1`
+
+## 私有仓库
+对于私有仓库需要授权访问，gitlab可以新建一个仅有存储doc spec的git仓库读权限的账户，然后在该账户下新建`personal_access_tokens`
+
+访问格式如下<https://oauth:personal_access_tokens@gitlab.example.com/king/doc-server.git>
 
 ## 直接编译
 设置好环境变量之后
@@ -146,8 +148,18 @@ docker build -t doc_server:0.1 .
 # 删除重复的
 docker images | grep "^<none>" | awk '{print $3}' | xargs -i docker rmi {}
 # 直接测试运行
-docker run --rm -it -p 8888:8888 doc_server:0.1
+docker run --rm -it -e REDIS_URL=redis://redis_host:6379/1 -p 8888:8888 doc_server:0.1
+
+# push
+docker login
+docker tag doc_server:0.1 qiujinwu/doc-server:0.1
+docker push qiujinwu/docl-server:0.1
 ```
+
+docker镜像见<https://hub.docker.com/r/qiujinwu/doc-server/>
+
+关于kubernet配置，参见[这里](Kubernete.md)
+
 
 # 企业号登陆
 ## 环境变量

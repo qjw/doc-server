@@ -9,18 +9,32 @@ import (
 	"github.com/qjw/kelly"
 	md "github.com/qjw/kelly/middleware"
 	"github.com/qjw/kelly/sessions"
+	parse "github.com/qjw/url"
 	"gopkg.in/redis.v5"
 	"gopkg.in/src-d/go-git.v4"
 )
 
 func initRedis(config *Config) *redis.Client {
+	c, err := parse.ParseRedis(config.RedisUrl)
+	if err != nil {
+		fmt.Printf("invalid redis url %s,error %s\n", config.RedisUrl, err.Error())
+		return nil
+	}
+
+	pwd := ""
+	if c.Password != nil {
+		pwd = *c.Password
+	}
 	redisClient := redis.NewClient(&redis.Options{
-		Addr:     fmt.Sprintf("%s:%d", config.RedisHost, config.RedisPort),
-		Password: config.RedisPassword,
-		DB:       config.RedisDb,
+		Addr:     c.Host,
+		Password: pwd,
+		DB:       c.Db,
 	})
 	if err := redisClient.Ping().Err(); err != nil {
-		panic("failed to connect redis")
+		panic(fmt.Errorf("failed to connect redis %s %s\n",
+			config.RedisUrl,
+			err.Error(),
+		))
 	}
 	return redisClient
 }

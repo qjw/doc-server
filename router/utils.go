@@ -36,13 +36,13 @@ func CheckIfError(err error) {
 }
 
 func GetEnv(key, fallback string) string {
-	if value, ok := os.LookupEnv(key); ok {
+	if value, ok := os.LookupEnv(key); ok && len(value) > 0 {
 		return value
 	}
 	return fallback
 }
 func GetEnvInt(key string, fallback int) int {
-	if value, ok := os.LookupEnv(key); ok {
+	if value, ok := os.LookupEnv(key); ok && len(value) > 0 {
 		if i, err := strconv.ParseInt(value, 10, 32); err == nil {
 			return int(i)
 		}
