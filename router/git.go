@@ -8,7 +8,6 @@ import (
 	"net/http"
 
 	"github.com/qjw/kelly"
-	"github.com/qjw/kelly/sessions"
 	"gopkg.in/src-d/go-git.v4"
 	"gopkg.in/src-d/go-git.v4/plumbing"
 	"gopkg.in/src-d/go-git.v4/plumbing/object"
@@ -134,10 +133,7 @@ func initGitRouter(repository *git.Repository, r kelly.Router) {
 		})
 	})
 
-	authR := r.Group("/",
-		sessions.LoginRequired(),
-	)
-
+	authR := r
 	authR.GET("/spec", func(c *kelly.Context) {
 		rd, err := gitLatestFile(repository, "spec.json")
 		if err != nil {

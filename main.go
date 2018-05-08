@@ -6,7 +6,7 @@ import (
 	"os/signal"
 	"syscall"
 
-	R "github.com/qjw/doc-server/router"
+	R "github.com/lixinio/doc-server/router"
 	"github.com/qjw/kelly"
 	"gopkg.in/src-d/go-git.v4"
 )

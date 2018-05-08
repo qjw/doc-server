@@ -23,14 +23,6 @@ export async function descriptionApi (params) {
 	  })
 }
 
-export async function currentApi (params) {
-  return request({
-		url: "/api/v1/current",
-	    method: 'get',
-	    data: params,
-	  })
-}
-
 export async function loginApi (params) {
   return request({
 		url: "/api/v1/login",
