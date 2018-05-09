@@ -1,27 +1,13 @@
-#FROM docker.io/alpine
-FROM ubuntu:16.04
+FROM alpine:3.5
+
+RUN apk add --no-cache ca-certificates
 
 WORKDIR /app
 
 EXPOSE 8888
 
-RUN \
-	apt-get update && \
-	apt-get install -y ca-certificates && \
-	apt-get -y autoremove && \
-	apt-get clean
+COPY swaggerui /app/swaggerui
+COPY frontend/dist /app/dist
+COPY doc-server /app/doc-server
 
-ADD ./swaggerui /app/swaggerui
-ADD ./frontend/dist /app/dist
-ADD ./doc-server /app/doc-server
-
-ENV LOCAL_DIR=/app/data
-ENV SWAGGER_UI=/app/swaggerui
-ENV FRONTEND=/app/dist
-ENV PORT=8888
-ENV GITLAB_TOKEN=
-
-#ARG PARAM
 CMD ["/app/doc-server"]
-
-
