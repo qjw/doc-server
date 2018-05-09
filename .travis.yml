@@ -17,6 +17,4 @@ before_install:
   - docker build -t lixinio/doc-server:1.1.0 .
 script:
   - docker images
-  - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
-  - docker push lixinio/doc-server:1.1.0
 
