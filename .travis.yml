@@ -9,7 +9,7 @@ before_install:
   - export PATH="${GOPATH}/bin:${PATH}"
   - export ROOT=/tmp/go_$$
   - go version
-  - export SUB_ROOT="${ROOT}/src/github.com/qjw/"
+  - export SUB_ROOT="${ROOT}/src/github.com/lixinio/"
   - mkdir -p "${SUB_ROOT}" && ln -s "`pwd`" "${SUB_ROOT}/doc-server" && cd "${SUB_ROOT}/doc-server"
   - export GOPATH="${ROOT}:${GOPATH}"
   - govendor sync && make
