@@ -8,7 +8,7 @@ const { Header, Content, Footer, Row, Col } = Layout;
 import Page from '../components/page/page'
 
 const App = ({ state, children, location, dispatch}) => {
-  const {description,current} = state
+  const {description} = state
   return (
 	<div>
 	  <Helmet>
@@ -20,8 +20,6 @@ const App = ({ state, children, location, dispatch}) => {
 			<span>
 			<span style={{fontSize: 32,color: "#cccccc"}}>{description && description.title}</span>
 			<span style={{fontSize: 16,color: "#cccccc"}}> {description && description.description}</span>
-			<span style={{fontSize: 16,color: "#cccccc",position: "absolute",right: "10px"}}
-			> {current && current.name}</span>
 			</span>
 	    </Header>
 		<Content>
