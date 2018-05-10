@@ -11,6 +11,7 @@ doc-server解决
 2. 通过企业微信做授权访问，避免核心API泄密
 3. 不依赖持久化DB，所有的spec.json放在私有的gitlab/github仓库，并支持查看各个历史版本
 
+体验环境 <http://docserver.t.self.kim>
 
 # spec
 doc-server 不依赖mysql等持久化的数据库存储配置和文档，而是从一个git仓库中获取所有信息，对于这个git仓库，有一些要求
